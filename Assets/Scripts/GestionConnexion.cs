@@ -186,7 +186,7 @@ public class GestionConnexion : MonoBehaviourPunCallbacks
     private void Update()
     {
         //Seulement afficher le bouton permettatnt de commencer la partie à celui qui a créé la salle
-        if (PhotonNetwork.IsMasterClient == true && PhotonNetwork.CurrentRoom.PlayerCount >= 2)
+        if (PhotonNetwork.IsMasterClient == true && PhotonNetwork.CurrentRoom.PlayerCount >= 1)
         {
             boutonJouer.SetActive(true);
         }
