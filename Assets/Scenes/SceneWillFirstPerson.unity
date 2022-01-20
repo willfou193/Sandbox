@@ -12433,7 +12433,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh22602
+  m_Name: pb_Mesh43016
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -15538,16 +15538,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Projectile
       objectReference: {fileID: 0}
-    - target: {fileID: 3291304117285002087, guid: 5c7e5628a7fa8a24893dfafeb2bece4c,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5449802086343962780, guid: 5c7e5628a7fa8a24893dfafeb2bece4c,
-        type: 3}
-      propertyPath: inpact
-      value: 
-      objectReference: {fileID: 8300000, guid: 3af40823dbcfa504d90fc025207c5525, type: 3}
     - target: {fileID: 5449802086343962780, guid: 5c7e5628a7fa8a24893dfafeb2bece4c,
         type: 3}
       propertyPath: joueur
@@ -15558,26 +15548,6 @@ PrefabInstance:
       propertyPath: hitPrefab
       value: 
       objectReference: {fileID: 1183637993}
-    - target: {fileID: 5449802086343962780, guid: 5c7e5628a7fa8a24893dfafeb2bece4c,
-        type: 3}
-      propertyPath: muzzlePrefab
-      value: 
-      objectReference: {fileID: 1895476334}
-    - target: {fileID: 5449802086343962781, guid: 5c7e5628a7fa8a24893dfafeb2bece4c,
-        type: 3}
-      propertyPath: m_Mass
-      value: 0.0000001
-      objectReference: {fileID: 0}
-    - target: {fileID: 5449802086343962781, guid: 5c7e5628a7fa8a24893dfafeb2bece4c,
-        type: 3}
-      propertyPath: m_CollisionDetection
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5449802086689624885, guid: 5c7e5628a7fa8a24893dfafeb2bece4c,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c7e5628a7fa8a24893dfafeb2bece4c, type: 3}
 --- !u!4 &5449802086343962778 stripped
