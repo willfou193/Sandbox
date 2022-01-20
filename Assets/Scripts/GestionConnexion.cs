@@ -20,8 +20,12 @@ public class GestionConnexion : MonoBehaviourPunCallbacks
     public ItemSalle itemSallePrefab; //Prefab d'un nom de salle à instancier
     List<ItemSalle> listeItemsSalles = new List<ItemSalle>(); //Liste de salles
     public Transform contentObjet; //Conteneur de la liste des salles
-    public float tempsRafraichissement = 1.5f; //Délai pour éviter un bug
+    public float tempsRafraichissement = 1f; //Délai pour éviter un bug
     float prochainRafraichissement; //Délai pour éviter un bug
+    public List<ItemPerso> playerItemList = new List<ItemPerso>(); //Liste des cartes de joueur
+    public ItemPerso itemPersoPrefab; //Prefab de la carte du parent
+    public Transform itemPersoParent; //Prefab lié à la carte de joueur
+    public GameObject boutonJouer; //Bouton qui permet de démarer la partie
 
 
     public void ConnexionLobby()
@@ -53,7 +57,8 @@ public class GestionConnexion : MonoBehaviourPunCallbacks
     public void CreerPartie()
     {
         //Déterminer les options de la salle (RoomOptions)
-        roomOptions.MaxPlayers = 5;
+        roomOptions.MaxPlayers = 4;
+        roomOptions.BroadcastPropsChangeToAll = true;
         roomOptions.IsOpen = true;
         roomOptions.IsVisible = true;
 
@@ -67,9 +72,6 @@ public class GestionConnexion : MonoBehaviourPunCallbacks
     //Quand on rejoint une salle...
     public override void OnJoinedRoom()
     {
-        //Storer le texte d'attente dans la variable afin de l'afficher
-        //TexteAttente.text = "Ton ami va se connecter d'ici peu...";
-
         //Désactiver l'interface du Lobby
         InterfaceLobby.SetActive(false);
 
@@ -79,6 +81,20 @@ public class GestionConnexion : MonoBehaviourPunCallbacks
         //Nom de la salle
         nomSalle.text = "Nom de la salle: " + PhotonNetwork.CurrentRoom.Name;
 
+        //Rafraichir la liste de joueurs
+        RafraichirListeJoueurs();
+    }
+
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        //Rafraichir la liste de joueurs
+        RafraichirListeJoueurs();
+    }
+
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        //Rafraichir la liste de joueurs
+        RafraichirListeJoueurs();
     }
 
     //Lorsque la liste des salles se fait rafraîchir par Photon...
@@ -132,5 +148,58 @@ public class GestionConnexion : MonoBehaviourPunCallbacks
         //Retourner au lobby
         InterfaceSalle.SetActive(false);
         InterfaceLobby.SetActive(true);
+    }
+
+    //Rafrahichir la liste des joueurs dans la salle
+    void RafraichirListeJoueurs()
+    {
+        //Tout détruire
+        foreach(ItemPerso item in playerItemList)
+        {
+            Destroy(item.gameObject);
+        }
+        playerItemList.Clear();
+
+        //Si il n'y a plus personne dans la salle, renvoyer la fonction
+        if(PhotonNetwork.CurrentRoom == null)
+        {
+            return;
+        }
+
+        //Pour chaque joueur dans la salle, instancier une nouvelle carte de joueur,
+        //et l'ajouter dans la liste
+        foreach(KeyValuePair<int, Player> joueur in PhotonNetwork.CurrentRoom.Players)
+        {
+            ItemPerso newPlayerItem = Instantiate(itemPersoPrefab, itemPersoParent);
+            newPlayerItem.SetPlayerInfo(joueur.Value);
+            playerItemList.Add(newPlayerItem);
+
+            //Vérifier si c'est le joueur local
+            if (joueur.Value == PhotonNetwork.LocalPlayer)
+            {
+                //Permettre de faire des changements
+                newPlayerItem.ApplyLocalChanges();
+            }
+        }
+    }
+
+    private void Update()
+    {
+        //Seulement afficher le bouton permettatnt de commencer la partie à celui qui a créé la salle
+        if (PhotonNetwork.IsMasterClient == true && PhotonNetwork.CurrentRoom.PlayerCount >= 2)
+        {
+            boutonJouer.SetActive(true);
+        }
+        //Sinon, le désactiver
+        else
+        {
+            boutonJouer.SetActive(false);
+        }
+    }
+
+    //Fonction appelée lorsque l'on clique sur le bouton Jouer
+    public void OnClickPlayButton()
+    {
+        PhotonNetwork.LoadLevel("Tristan");
     }
 }

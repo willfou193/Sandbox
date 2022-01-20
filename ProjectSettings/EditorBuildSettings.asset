@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Accueil.unity
     guid: 007acc0321eaed640b873fd2c2e8e935
+  - enabled: 1
+    path: Assets/Scenes/Tristan.unity
+    guid: 40dcf98ddcf6a964198aa8e0a2f7ee48
   m_configObjects: {}
