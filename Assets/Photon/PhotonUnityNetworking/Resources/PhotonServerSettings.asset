@@ -42,6 +42,8 @@ MonoBehaviour:
   - JoueSonTir
   - detruireBalleHit
   - JoueSonShoot
+  - AppliquerDegats
+  - JoueSonMort
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

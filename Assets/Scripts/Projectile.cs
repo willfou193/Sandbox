@@ -40,9 +40,11 @@ public class Projectile : MonoBehaviourPunCallbacks
     //Détruire l'objet
     public IEnumerator detruireObjet(GameObject objetADetruire, float delai)
     {
-        print("allo");
-        yield return new WaitForSeconds(delai);
-        PhotonNetwork.Destroy(objetADetruire);
+        if (photonView.IsMine)
+        {
+            yield return new WaitForSeconds(delai);
+            PhotonNetwork.Destroy(objetADetruire);
+        }
     }
 
     //Fonction permettant de faire le son du tir

@@ -8,6 +8,8 @@ TagManager:
   - caisse
   - caisseChoisie
   - sort
+  - BalleTarrev
+  - camMort
   layers:
   - Default
   - TransparentFX
