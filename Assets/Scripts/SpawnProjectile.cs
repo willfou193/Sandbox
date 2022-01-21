@@ -16,7 +16,7 @@ public class SpawnProjectile : MonoBehaviourPunCallbacks
     void Update()
     {
         //Lorsque le joueur appuie sur clique gauche et qu'il peut tirer
-        if(Input.GetMouseButton(0) && peutTirer && photonView.IsMine){
+        if(Input.GetMouseButton(0) && peutTirer && photonView.IsMine && viePersonnage.mort == false){
 
             //Indiquer qu'il peut plus tirer avant un petit délai
             peutTirer = false;

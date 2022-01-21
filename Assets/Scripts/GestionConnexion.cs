@@ -195,6 +195,18 @@ public class GestionConnexion : MonoBehaviourPunCallbacks
         {
             boutonJouer.SetActive(false);
         }
+
+        //Raccourci avec ENTER pour se connecter
+        if (Input.GetKeyDown(KeyCode.Return) && ConnexionServeur.activeSelf)
+        {
+            ConnexionLobby();
+        }
+
+        //Raccourci avec ENTER pour créer une partie
+        if (Input.GetKeyDown(KeyCode.Return) && InterfaceLobby.activeSelf)
+        {
+            CreerPartie();
+        }
     }
 
     //Fonction appelée lorsque l'on clique sur le bouton Jouer

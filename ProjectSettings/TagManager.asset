@@ -10,6 +10,8 @@ TagManager:
   - sort
   - BalleTarrev
   - camMort
+  - Connexion
+  - positions
   layers:
   - Default
   - TransparentFX
