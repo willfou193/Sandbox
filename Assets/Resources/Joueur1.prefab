@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7406072622957642677
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 827580794555481912}
+  m_Layer: 0
+  m_Name: EmplacementProjectile
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &827580794555481912
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7406072622957642677}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.732}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7467710150181426444}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7467710148538906740
 GameObject:
   m_ObjectHideFlags: 0
@@ -329,7 +359,7 @@ Transform:
   - {fileID: 7467710150235669662}
   - {fileID: 7467710149108927826}
   - {fileID: 7467710150139182800}
-  - {fileID: 3896302348162095992}
+  - {fileID: 827580794555481912}
   - {fileID: 6935663274489680117}
   - {fileID: 596655476922709117}
   m_Father: {fileID: 0}
@@ -452,10 +482,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a07391627fd4854da317f4a9cd7fca7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  balle: {fileID: 121099555041820535}
+  emplacementBalle: {fileID: 7406072622957642677}
   vitesseBalle: 30
   muzzlePrefab: {fileID: 5533558767667310805}
   gunshot: {fileID: 8300000, guid: cc0621dfc19c9e0439257b030f257d8f, type: 3}
+  cooldownTire: 1.2
 --- !u!82 &7467710150181426433
 AudioSource:
   m_ObjectHideFlags: 0
@@ -716,6 +747,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BoutFusilEffect
       objectReference: {fileID: 0}
+    - target: {fileID: 4858917047488108117, guid: f6c0f870b78d5e447a5678c344f31a66,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8062881693645583989, guid: f6c0f870b78d5e447a5678c344f31a66,
         type: 3}
       propertyPath: m_RootOrder
@@ -785,127 +821,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1127431724948563584}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &3171436627573875728
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 7467710150181426444}
-    m_Modifications:
-    - target: {fileID: 1878360141889077096, guid: 5c7e5628a7fa8a24893dfafeb2bece4c,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1878360141889077096, guid: 5c7e5628a7fa8a24893dfafeb2bece4c,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1878360141889077096, guid: 5c7e5628a7fa8a24893dfafeb2bece4c,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1878360141889077096, guid: 5c7e5628a7fa8a24893dfafeb2bece4c,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.732
-      objectReference: {fileID: 0}
-    - target: {fileID: 1878360141889077096, guid: 5c7e5628a7fa8a24893dfafeb2bece4c,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1878360141889077096, guid: 5c7e5628a7fa8a24893dfafeb2bece4c,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1878360141889077096, guid: 5c7e5628a7fa8a24893dfafeb2bece4c,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1878360141889077096, guid: 5c7e5628a7fa8a24893dfafeb2bece4c,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1878360141889077096, guid: 5c7e5628a7fa8a24893dfafeb2bece4c,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1878360141889077096, guid: 5c7e5628a7fa8a24893dfafeb2bece4c,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1878360141889077096, guid: 5c7e5628a7fa8a24893dfafeb2bece4c,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3291304117285002087, guid: 5c7e5628a7fa8a24893dfafeb2bece4c,
-        type: 3}
-      propertyPath: m_Name
-      value: Projectile
-      objectReference: {fileID: 0}
-    - target: {fileID: 3291304117285002087, guid: 5c7e5628a7fa8a24893dfafeb2bece4c,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5449802086343962780, guid: 5c7e5628a7fa8a24893dfafeb2bece4c,
-        type: 3}
-      propertyPath: inpact
-      value: 
-      objectReference: {fileID: 8300000, guid: 3af40823dbcfa504d90fc025207c5525, type: 3}
-    - target: {fileID: 5449802086343962780, guid: 5c7e5628a7fa8a24893dfafeb2bece4c,
-        type: 3}
-      propertyPath: joueur
-      value: 
-      objectReference: {fileID: 7467710150181426441}
-    - target: {fileID: 5449802086343962780, guid: 5c7e5628a7fa8a24893dfafeb2bece4c,
-        type: 3}
-      propertyPath: hitPrefab
-      value: 
-      objectReference: {fileID: 2651764345815700573}
-    - target: {fileID: 5449802086343962780, guid: 5c7e5628a7fa8a24893dfafeb2bece4c,
-        type: 3}
-      propertyPath: muzzlePrefab
-      value: 
-      objectReference: {fileID: 5533558767667310805}
-    - target: {fileID: 5449802086343962781, guid: 5c7e5628a7fa8a24893dfafeb2bece4c,
-        type: 3}
-      propertyPath: m_Mass
-      value: 0.0000001
-      objectReference: {fileID: 0}
-    - target: {fileID: 5449802086343962781, guid: 5c7e5628a7fa8a24893dfafeb2bece4c,
-        type: 3}
-      propertyPath: m_CollisionDetection
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5449802086689624885, guid: 5c7e5628a7fa8a24893dfafeb2bece4c,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 5c7e5628a7fa8a24893dfafeb2bece4c, type: 3}
---- !u!1 &121099555041820535 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3291304117285002087, guid: 5c7e5628a7fa8a24893dfafeb2bece4c,
-    type: 3}
-  m_PrefabInstance: {fileID: 3171436627573875728}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &3896302348162095992 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1878360141889077096, guid: 5c7e5628a7fa8a24893dfafeb2bece4c,
-    type: 3}
-  m_PrefabInstance: {fileID: 3171436627573875728}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7467710149943771656
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -942,6 +857,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Hit
+      objectReference: {fileID: 0}
+    - target: {fileID: 4858917047488108117, guid: 879069d8944e2c4489b3211634e422c0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8062881693645583989, guid: 879069d8944e2c4489b3211634e422c0,
         type: 3}
@@ -1000,12 +920,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 879069d8944e2c4489b3211634e422c0, type: 3}
---- !u!1 &2651764345815700573 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4858917047488108117, guid: 879069d8944e2c4489b3211634e422c0,
-    type: 3}
-  m_PrefabInstance: {fileID: 7467710149943771656}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &596655476922709117 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8062881693645583989, guid: 879069d8944e2c4489b3211634e422c0,
