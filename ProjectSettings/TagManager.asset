@@ -12,6 +12,8 @@ TagManager:
   - camMort
   - Connexion
   - positions
+  - buissons
+  - arbre
   layers:
   - Default
   - TransparentFX

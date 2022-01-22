@@ -501,7 +501,7 @@ RectTransform:
   - {fileID: 3003941089176135335}
   - {fileID: 6988909264405349296}
   m_Father: {fileID: 7467710150181426444}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -882,12 +882,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7406072622957642677}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.838}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.3971625}
+  m_LocalScale: {x: 6.3155236, y: 6.3155236, z: 1.6014615}
   m_Children: []
-  m_Father: {fileID: 7467710150181426444}
-  m_RootOrder: 4
+  m_Father: {fileID: 7467710150139182800}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7467710148538906740
 GameObject:
@@ -977,7 +977,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed47e8d8218cfb143a08e536437b23d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivity: 100
+  mouseSensitivity: 125
 --- !u!81 &7467710148538907016
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1093,6 +1093,7 @@ GameObject:
   - component: {fileID: 7467710150139182800}
   - component: {fileID: 7467710150139182805}
   - component: {fileID: 7467710150139182802}
+  - component: {fileID: 53039591239498487}
   m_Layer: 0
   m_Name: boutFusil
   m_TagString: Untagged
@@ -1110,7 +1111,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.59}
   m_LocalScale: {x: 0.15834, y: 0.15834, z: 0.62442964}
-  m_Children: []
+  m_Children:
+  - {fileID: 827580794555481912}
   m_Father: {fileID: 7467710150181426444}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1164,6 +1166,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &53039591239498487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7467710150139182801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed47e8d8218cfb143a08e536437b23d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseSensitivity: 125
 --- !u!1 &7467710150181426441
 GameObject:
   m_ObjectHideFlags: 0
@@ -1205,7 +1220,6 @@ Transform:
   - {fileID: 7467710150235669662}
   - {fileID: 7467710149108927826}
   - {fileID: 7467710150139182800}
-  - {fileID: 827580794555481912}
   - {fileID: 6935663274489680117}
   - {fileID: 596655476922709117}
   - {fileID: 6883230937903970769}
@@ -1712,7 +1726,7 @@ RectTransform:
   m_Children:
   - {fileID: 598026179838868596}
   m_Father: {fileID: 7467710150181426444}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1800,7 +1814,7 @@ PrefabInstance:
     - target: {fileID: 8062881693645583989, guid: f6c0f870b78d5e447a5678c344f31a66,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8062881693645583989, guid: f6c0f870b78d5e447a5678c344f31a66,
         type: 3}
@@ -1854,15 +1868,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6c0f870b78d5e447a5678c344f31a66, type: 3}
---- !u!1 &5533558767667310805 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4858917047488108117, guid: f6c0f870b78d5e447a5678c344f31a66,
-    type: 3}
-  m_PrefabInstance: {fileID: 1127431724948563584}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6935663274489680117 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8062881693645583989, guid: f6c0f870b78d5e447a5678c344f31a66,
+    type: 3}
+  m_PrefabInstance: {fileID: 1127431724948563584}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5533558767667310805 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4858917047488108117, guid: f6c0f870b78d5e447a5678c344f31a66,
     type: 3}
   m_PrefabInstance: {fileID: 1127431724948563584}
   m_PrefabAsset: {fileID: 0}
@@ -1911,7 +1925,7 @@ PrefabInstance:
     - target: {fileID: 8062881693645583989, guid: 879069d8944e2c4489b3211634e422c0,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8062881693645583989, guid: 879069d8944e2c4489b3211634e422c0,
         type: 3}
