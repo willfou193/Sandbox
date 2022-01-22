@@ -45,6 +45,8 @@ MonoBehaviour:
   - AppliquerDegats
   - JoueSonMort
   - Revivre
+  - mortMonstre
+  - AppliquerDegatsBalleTarrev
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

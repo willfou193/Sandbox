@@ -883,7 +883,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7406072622957642677}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.3971625}
+  m_LocalPosition: {x: 0, y: 0, z: 1.5}
   m_LocalScale: {x: 6.3155236, y: 6.3155236, z: 1.6014615}
   m_Children: []
   m_Father: {fileID: 7467710150139182800}
@@ -1109,7 +1109,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7467710150139182801}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.59}
+  m_LocalPosition: {x: 0, y: 0, z: 0.775}
   m_LocalScale: {x: 0.15834, y: 0.15834, z: 0.62442964}
   m_Children:
   - {fileID: 827580794555481912}
@@ -1191,13 +1191,13 @@ GameObject:
   - component: {fileID: 7467710150181426445}
   - component: {fileID: 7467710150181426442}
   - component: {fileID: 7467710150181426443}
-  - component: {fileID: 7467710150181426440}
   - component: {fileID: 7467710150181426447}
   - component: {fileID: 7467710150181426446}
   - component: {fileID: 7467710150181426433}
   - component: {fileID: 3903163747691146996}
   - component: {fileID: 8918346451479836969}
   - component: {fileID: 4641090020990591304}
+  - component: {fileID: -956561948011559246}
   m_Layer: 0
   m_Name: Joueur1
   m_TagString: Untagged
@@ -1291,29 +1291,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7467710150181426440
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7467710150181426441}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83d355adebe8e0640a434a6611b5d858, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cameraJoueur: {fileID: 7467710148538906742}
-  devantJoueur: {fileID: 7467710150235669658}
-  Joueur: {fileID: 7467710150181426441}
-  longueurActiver: 5
-  vitesse: 7
-  vitesseTourne: 300
-  forceDuSaut: 10
-  gravite: -20
-  levierActiver: 0
-  sortEnQuestion: 
-  shortcut: {fileID: 0}
 --- !u!143 &7467710150181426447
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1523,6 +1500,30 @@ MonoBehaviour:
   deathTimer: {fileID: 7845559199499099690}
   positionsSpawn: []
   delaiHit: 0
+--- !u!114 &-956561948011559246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7467710150181426441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 483dbd67731c7ea439674de5ede7ce3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraJoueur: {fileID: 7467710148538906742}
+  vitesse: 7
+  vitesseTourne: 300
+  forceDuSaut: 10
+  gravite: -20
+  rayon: 1000
+  particulePassif: {fileID: 1512483015932896484, guid: e6b009691c5275746b0052fccf295f27,
+    type: 3}
+  distancePlusProche: 0
+  indexPlusProche: 0
+  valeurPassifAConvertir: 0
+  cooldownPassif: 20
 --- !u!1 &7467710150235669658
 GameObject:
   m_ObjectHideFlags: 0

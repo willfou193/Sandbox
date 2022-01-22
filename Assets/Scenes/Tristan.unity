@@ -3498,7 +3498,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!135 &1224407079
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3897,7 +3897,7 @@ MonoBehaviour:
   - {fileID: 3395816247889797596, guid: cb9fc82c658844d498a35b26de51526b, type: 3}
   - {fileID: 6721580895843567779, guid: 514c5be584cb58a44b7fa489e8ca2d40, type: 3}
   - {fileID: 6265642697304811936, guid: 1a0cac148ee3c714cae7a8912687fdcd, type: 3}
-  cooldownMonstres: 60
+  cooldownMonstres: 15
 --- !u!4 &1291490604
 Transform:
   m_ObjectHideFlags: 0

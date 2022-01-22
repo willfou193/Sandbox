@@ -95,9 +95,9 @@ public class viePersonnage : MonoBehaviourPunCallbacks
             //Indiquer au délai qu'il a été hit
             delaiHit = true;
 
-            sliderJoueurUI.value = (vieJoueur - 0.25f);
+            sliderJoueurUI.value = (vieJoueur - deplacementAbiletesTarrev.degatAttaqueTarrev);
             //Dire aux autres joueurs que le joueur a été touché par une balle
-            photonView.RPC("AppliquerDegats", RpcTarget.AllBuffered, 0.25f);
+            photonView.RPC("AppliquerDegats", RpcTarget.AllBuffered, deplacementAbiletesTarrev.degatAttaqueTarrev);
         }
     }
 
