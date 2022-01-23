@@ -25,7 +25,9 @@ public class deplacementAbiletesTarrev : MonoBehaviourPunCallbacks
     public int indexPlusProche; //Index de l'objet le plus proche lorsque le passif change
     public float valeurPassifAConvertir; //Distance de la cible
     public float cooldownPassif = 20f; //Cooldown du passif
-
+    public bool verifierCible = true; //Permet de vérifier si on a changer de cible
+    public GameObject ciblePassif; //Cible du passif
+    public LineRenderer LineRenderer;
 
     void Start()
     {
@@ -39,7 +41,9 @@ public class deplacementAbiletesTarrev : MonoBehaviourPunCallbacks
         }
 
         //À chaque 20 secondes, Tarrev marque l’ennemi le plus proche.
-        InvokeRepeating("marquePassif", 1f, cooldownPassif);
+        InvokeRepeating("marquePassif", 0f, cooldownPassif);
+
+        LineRenderer = GameObject.FindGameObjectWithTag("ligne").GetComponent<LineRenderer>();
     }
 
     /*
@@ -99,7 +103,7 @@ public class deplacementAbiletesTarrev : MonoBehaviourPunCallbacks
         }
 
         //VALEURS POUR LES ABILITIES/SAUT
-        if (ennemisProches.Count != 0)
+        if (ennemisProches.Count != 0 && ennemisProches[indexPlusProche].gameObject != null)
         {
             //Calculer la distance entre Tarrev et l'ennemi le plus proche
             valeurPassifAConvertir = Vector3.Distance(gameObject.transform.position, ennemisProches[indexPlusProche].gameObject.transform.position);
@@ -110,15 +114,33 @@ public class deplacementAbiletesTarrev : MonoBehaviourPunCallbacks
 
             //LE SAUT
             forceDuSaut = ((valeurPassifAConvertir / 4f) + 5f);
-            print(degatAttaqueTarrev);
+            //int(degatAttaqueTarrev);
+
+            //Tracer une ligne entre Tarrev et sa cible
+            // set the color of the line
+            LineRenderer.startColor = Color.red;
+            LineRenderer.endColor = Color.red;
+
+            // set width of the renderer
+            LineRenderer.startWidth = 0.3f;
+            LineRenderer.endWidth = 0.3f;
+
+            // set the position
+            LineRenderer.SetPosition(0, cameraJoueur.transform.position);
+            LineRenderer.SetPosition(1, ciblePassif.transform.position);
         }
 
-        //CHANGER LA COULEUR DE LA PARTICULE SI CE N'EST PAS LA NOTRE
+        //SI LA CIBLE A ÉTÉ TUÉE, CHANGER DE CIBLE
+        if (ciblePassif.gameObject == null && verifierCible == false)
+        {
+            verifierCible = true;
+            marquePassif();
+        }
     }
 
     public void marquePassif()
     {
-        
+        verifierCible = false;
         //Aller chercher tous les colliders proche
         Collider[] colliders = Physics.OverlapSphere(transform.position, rayon);
 
@@ -130,9 +152,9 @@ public class deplacementAbiletesTarrev : MonoBehaviourPunCallbacks
         foreach (Collider objetProche in colliders)
         {
             //Si il a un rigidbody
-            if (objetProche.GetComponent<Rigidbody>() != null)
+            if ((colliders.LongLength > 0) && (objetProche.gameObject.tag == "Player" || objetProche.gameObject.tag == "Ennemi") && (objetProche.gameObject.GetComponent<PhotonView>().ViewID != gameObject.GetComponent<PhotonView>().ViewID))
             {
-                
+                print("marque");
                 //Remplir une liste avec toutes les distances entre l'objet et Tarrev
                 float distance = Vector3.Distance(gameObject.transform.position, objetProche.gameObject.transform.position);
 
@@ -143,22 +165,34 @@ public class deplacementAbiletesTarrev : MonoBehaviourPunCallbacks
                 distances.Add(distance);
             }  
         }
+        if(distances.Count > 0)
+        {
+            //Trouver la distance la plus proche
+            distancePlusProche = distances.Min();
 
-        //Trouver la distance la plus proche
-        distancePlusProche = distances.Min();
+            //Trouver l'index de la distance la plus proche afin de trouver l'objet le plus proche
+            indexPlusProche = distances.IndexOf(distancePlusProche);
 
-        //Trouver l'index de la distance la plus proche afin de trouver l'objet le plus proche
-        indexPlusProche = distances.IndexOf(distancePlusProche);
+            //Instancier la particule
+            GameObject nouvelleParticulePassif = PhotonNetwork.Instantiate(particulePassif.name,
+            new Vector3(ennemisProches[indexPlusProche].gameObject.transform.position.x, ennemisProches[indexPlusProche].gameObject.transform.position.y + ennemisProches[indexPlusProche].gameObject.GetComponent<Collider>().bounds.size.y, ennemisProches[indexPlusProche].gameObject.transform.position.z), Quaternion.identity, 0);
 
-        //Instancier la particule
-        GameObject nouvelleParticulePassif = PhotonNetwork.Instantiate(particulePassif.name, 
-        new Vector3(ennemisProches[indexPlusProche].gameObject.transform.position.x, ennemisProches[indexPlusProche].gameObject.transform.position.y + ennemisProches[indexPlusProche].gameObject.GetComponent<Collider>().bounds.size.y, ennemisProches[indexPlusProche].gameObject.transform.position.z), Quaternion.identity, 0);
-        
-        //La mettre enfant de la marque
-        nouvelleParticulePassif.transform.parent = ennemisProches[indexPlusProche].gameObject.transform;
+            //storer la marque
+            ciblePassif = ennemisProches[indexPlusProche].gameObject;
+            print("ENNEMI PROCHE" + ciblePassif.name);
+            //La mettre enfant de la marque
+            nouvelleParticulePassif.transform.parent = ennemisProches[indexPlusProche].gameObject.transform;
 
-        //La détruire après 30 secondes
-        StartCoroutine(enleverParticule(nouvelleParticulePassif.gameObject, cooldownPassif));
+            //Changer sa couleur si on est owner de la particule
+            if (nouvelleParticulePassif.gameObject.GetComponent<PhotonView>().Owner.NickName == PhotonNetwork.LocalPlayer.NickName)
+            {
+                ParticleSystem.MainModule settingsParticule = nouvelleParticulePassif.GetComponent<ParticleSystem>().main;
+                settingsParticule.startColor = new ParticleSystem.MinMaxGradient(Color.yellow);
+            }
+
+            //La détruire après 20 secondes
+            StartCoroutine(enleverParticule(nouvelleParticulePassif.gameObject, cooldownPassif));
+        }
     }
 
     //Enlever la particule sur le réseau

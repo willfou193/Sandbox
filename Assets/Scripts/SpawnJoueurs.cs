@@ -24,6 +24,9 @@ public class SpawnJoueurs : MonoBehaviour
             joueurAfaireSpawn = prefabJoueurs[(int)PhotonNetwork.LocalPlayer.CustomProperties["playerAvatar"]];
         }
 
+        //CHANGER NOM JOUEUR LOCAL         
+        
+
         //Instancier le joueur
         PhotonNetwork.Instantiate(joueurAfaireSpawn.name, spawnPoint.position, Quaternion.identity);
     }

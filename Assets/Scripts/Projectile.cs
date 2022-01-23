@@ -12,7 +12,10 @@ public class Projectile : MonoBehaviourPunCallbacks
     void Start()
     {
         //La détruire sur réseau après 3 secondes
-        StartCoroutine(detruireObjet(gameObject, 2f));
+        StartCoroutine(detruireObjet(gameObject, 5f));
+
+        //Ignorer la collision avec les arbres, les buissons...
+        Physics.IgnoreLayerCollision(10, 11);
     }
 
     //Lorsque la balle collide avec un objet...
