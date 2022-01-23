@@ -20,7 +20,7 @@ public class GestionConnexion : MonoBehaviourPunCallbacks
     public ItemSalle itemSallePrefab; //Prefab d'un nom de salle à instancier
     List<ItemSalle> listeItemsSalles = new List<ItemSalle>(); //Liste de salles
     public Transform contentObjet; //Conteneur de la liste des salles
-    public float tempsRafraichissement = 1f; //Délai pour éviter un bug
+    public float tempsRafraichissement = 0.5f; //Délai pour éviter un bug
     float prochainRafraichissement; //Délai pour éviter un bug
     public List<ItemPerso> playerItemList = new List<ItemPerso>(); //Liste des cartes de joueur
     public ItemPerso itemPersoPrefab; //Prefab de la carte du parent

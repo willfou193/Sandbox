@@ -42,6 +42,7 @@ public class viePersonnage : MonoBehaviourPunCallbacks
             //Les sliders des autres joueurs ont la même rotation que la caméra locale du joueur
             sliderJoueur.gameObject.transform.rotation = Camera.main.transform.rotation;
 
+            //Désactiver le slider de vie UI des autres
             sliderJoueurUI.gameObject.SetActive(false);
         }
 
@@ -56,6 +57,9 @@ public class viePersonnage : MonoBehaviourPunCallbacks
 
             //Activer l'écran de mort
             ecranMort.SetActive(true);
+
+            //Désactiver le mesh renderer
+            photonView.RPC("changerMesh", RpcTarget.OthersBuffered, gameObject.name, false);
         }
 
         //COUNTDOWN TIMER
@@ -69,6 +73,10 @@ public class viePersonnage : MonoBehaviourPunCallbacks
                 //Désactiver l'écran de mort
                 ecranMort.SetActive(false);
 
+                //Activer le mesh renderer
+                photonView.RPC("changerMesh", RpcTarget.OthersBuffered, gameObject.name, true);
+
+                //Ajuster la valeur du UI local
                 sliderJoueurUI.value = (vieJoueur + 1f);
 
                 //Réanimer le joueur
@@ -87,7 +95,7 @@ public class viePersonnage : MonoBehaviourPunCallbacks
         }
     }
 
-    void OnCollisionEnter(Collision collision)
+    public void OnTriggerExit(Collider collision)
     {
         //Si je suis touché par une balle
         if (photonView.IsMine && collision.gameObject.tag == "BalleTarrev" && delaiHit == false)
@@ -95,9 +103,14 @@ public class viePersonnage : MonoBehaviourPunCallbacks
             //Indiquer au délai qu'il a été hit
             delaiHit = true;
 
+            //Changer la valeur du slider local
             sliderJoueurUI.value = (vieJoueur - deplacementAbiletesTarrev.degatAttaqueTarrev);
-            //Dire aux autres joueurs que le joueur a été touché par une balle
-            photonView.RPC("AppliquerDegats", RpcTarget.AllBuffered, deplacementAbiletesTarrev.degatAttaqueTarrev);
+
+            if (PhotonNetwork.IsMasterClient)
+            {
+                //Dire aux autres joueurs que le joueur a été touché par une balle
+                photonView.RPC("AppliquerDegats", RpcTarget.AllBuffered, deplacementAbiletesTarrev.degatAttaqueTarrev);
+            }
         }
     }
 
@@ -131,5 +144,12 @@ public class viePersonnage : MonoBehaviourPunCallbacks
         vieJoueur = 1f;
         sliderJoueur.value = vieJoueur;
         sliderJoueurUI.value = vieJoueur;
+    }
+
+    //Disable le Mesh Renderer en RPC si je suis mort
+    [PunRPC]
+    public void changerMesh(string nomObjet, bool changer)
+    {
+        GameObject.Find(nomObjet).GetComponent<MeshRenderer>().enabled = changer;
     }
 }

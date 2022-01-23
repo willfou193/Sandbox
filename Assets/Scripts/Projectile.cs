@@ -16,28 +16,34 @@ public class Projectile : MonoBehaviourPunCallbacks
 
         //Ignorer la collision avec les arbres, les buissons...
         Physics.IgnoreLayerCollision(10, 11);
+        //Ignorer la collision avec soi-même
+        //Physics.IgnoreLayerCollision(8, 11);
     }
 
     //Lorsque la balle collide avec un objet...
     void OnCollisionEnter(Collision collisionInfo) {
-        //Jouer le son d'impact sur réseau
-        photonView.RPC("JoueSonShoot", RpcTarget.All);
+        if (photonView.IsMine)
+        {
+            //Jouer le son d'impact sur réseau
+            photonView.RPC("JoueSonShoot", RpcTarget.All);
 
-        //Trouver le point de contact
-        ContactPoint contact = collisionInfo.contacts[0];
-        Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
-        Vector3 pos = contact.point;
+            //Trouver le point de contact
+            ContactPoint contact = collisionInfo.contacts[0];
+            Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
+            Vector3 pos = contact.point;
 
-        //Instancier la particule hit sur réseau
-        if(hitPrefab != null){
-            GameObject hitVFX = PhotonNetwork.Instantiate(hitPrefab.name, pos, rot);
-            hitVFX.SetActive(true);
+            //Instancier la particule hit sur réseau
+            if (hitPrefab != null)
+            {
+                GameObject hitVFX = PhotonNetwork.Instantiate(hitPrefab.name, pos, rot);
+                hitVFX.SetActive(true);
 
-            //La détruire sur réseau après 0.5secondes
-            StartCoroutine(detruireObjet(hitVFX.gameObject, 0.5f));
+                //La détruire sur réseau après 0.5secondes
+                StartCoroutine(detruireObjet(hitVFX.gameObject, 0.5f));
+            }
+
+            StartCoroutine(detruireObjet(gameObject, 0f));
         }
-
-        StartCoroutine(detruireObjet(gameObject, 0f));
     }
 
     //Détruire l'objet

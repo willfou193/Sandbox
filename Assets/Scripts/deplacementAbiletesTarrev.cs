@@ -27,10 +27,17 @@ public class deplacementAbiletesTarrev : MonoBehaviourPunCallbacks
     public float cooldownPassif = 20f; //Cooldown du passif
     public bool verifierCible = true; //Permet de v�rifier si on a changer de cible
     public GameObject ciblePassif; //Cible du passif
-    public LineRenderer LineRenderer;
+    public LineRenderer LineRenderer; //Ligne séparant Tarrev de sa marque
+    public AudioClip sonPassif; //Son du passif à Tarrev
+    public GameObject conteneurParticulePassif; //Permet de storer la particule du passif
+    public bool test;
 
     void Start()
     {
+        Invoke("teste", 2f);
+        //Trouver la ligne dans la scène
+        LineRenderer = GameObject.FindGameObjectWithTag("ligne").GetComponent<LineRenderer>();
+
         //Raccourci pour le character controler
         controleur = GetComponent<CharacterController>();
 
@@ -43,16 +50,20 @@ public class deplacementAbiletesTarrev : MonoBehaviourPunCallbacks
         //� chaque 20 secondes, Tarrev marque l�ennemi le plus proche.
         InvokeRepeating("marquePassif", 0f, cooldownPassif);
 
-        LineRenderer = GameObject.FindGameObjectWithTag("ligne").GetComponent<LineRenderer>();
+        //Associer son joueur à un layer pour pas que je collide avec le projectile
+        if (photonView.IsMine)
+        {
+            gameObject.layer = 8;
+        }
     }
 
     /*
-     * � chaque 30 secondes, Tarrev marque l�ennemi le plus proche. 
+     *   À chaque 30 secondes, Tarrev marque l�ennemi le plus proche. 
      *   Tarrev gagne plus d�hauteur de saut et de plus en plus de damage d�pendamment de la distance s�parant sa marque de lui.
      * 
     */
 
-    void Update()
+    void FixedUpdate()
     {
         if (photonView.IsMine && viePersonnage.mort == false)
         {
@@ -116,31 +127,41 @@ public class deplacementAbiletesTarrev : MonoBehaviourPunCallbacks
             forceDuSaut = ((valeurPassifAConvertir / 4f) + 5f);
             //int(degatAttaqueTarrev);
 
-            //Tracer une ligne entre Tarrev et sa cible
-            // set the color of the line
-            LineRenderer.startColor = Color.red;
-            LineRenderer.endColor = Color.red;
+            if (photonView.IsMine && LineRenderer != null)
+            {
+                //Tracer une ligne entre Tarrev et sa cible
+                LineRenderer.gameObject.SetActive(true);
 
-            // set width of the renderer
-            LineRenderer.startWidth = 0.3f;
-            LineRenderer.endWidth = 0.3f;
+                //Activer la particule
+                conteneurParticulePassif.SetActive(true);
 
-            // set the position
-            LineRenderer.SetPosition(0, gameObject.transform.position);
-            LineRenderer.SetPosition(1, ciblePassif.transform.position);
+                // set the color of the line
+                LineRenderer.startColor = Color.blue;
+                LineRenderer.endColor = Color.black;
+
+                // set width of the renderer
+                LineRenderer.startWidth = 0.1f;
+                LineRenderer.endWidth = 0.1f;
+
+                // set the position
+                LineRenderer.SetPosition(0, gameObject.transform.position);
+                LineRenderer.SetPosition(1, ciblePassif.transform.position);
+            }
         }
 
         //SI LA CIBLE A �T� TU�E, CHANGER DE CIBLE
-        if (ciblePassif.gameObject == null && verifierCible == false)
+        if (ciblePassif.gameObject == null && verifierCible == false && test == true)
         {
+            /*LineRenderer.gameObject.SetActive(false);
+            conteneurParticulePassif.SetActive(false);
             verifierCible = true;
-            marquePassif();
+            marquePassif();*/
         }
     }
 
     public void marquePassif()
     {
-        verifierCible = false;
+        
         //Aller chercher tous les colliders proche
         Collider[] colliders = Physics.OverlapSphere(transform.position, rayon);
 
@@ -179,10 +200,12 @@ public class deplacementAbiletesTarrev : MonoBehaviourPunCallbacks
 
             //storer la marque
             ciblePassif = ennemisProches[indexPlusProche].gameObject;
-            print("ENNEMI PROCHE" + ciblePassif.name);
+            
             //La mettre enfant de la marque
             nouvelleParticulePassif.transform.parent = ennemisProches[indexPlusProche].gameObject.transform;
 
+            //La storer dans une variable publique
+            conteneurParticulePassif = nouvelleParticulePassif;
             //Changer sa couleur si on est owner de la particule
             if (nouvelleParticulePassif.gameObject.GetComponent<PhotonView>().Owner.NickName == PhotonNetwork.LocalPlayer.NickName)
             {
@@ -190,8 +213,14 @@ public class deplacementAbiletesTarrev : MonoBehaviourPunCallbacks
                 settingsParticule.startColor = new ParticleSystem.MinMaxGradient(Color.yellow);
             }
 
+            //Jouer le son du passif sur réseau
+            photonView.RPC("JoueSonPassif", RpcTarget.All);
+
             //La d�truire apr�s 20 secondes
             StartCoroutine(enleverParticule(nouvelleParticulePassif.gameObject, cooldownPassif));
+
+            //Indiquer qu'il a bien trouvé des cibles
+            verifierCible = false;
         }
     }
 
@@ -206,6 +235,18 @@ public class deplacementAbiletesTarrev : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.Destroy(particule);
         }
+    }
+
+    //Fonction permettant de faire le son du tir
+    [PunRPC]
+    void JoueSonPassif()
+    {
+        GetComponent<AudioSource>().PlayOneShot(sonPassif);
+    }
+
+    public void teste()
+    {
+        test = true;
     }
 }
 

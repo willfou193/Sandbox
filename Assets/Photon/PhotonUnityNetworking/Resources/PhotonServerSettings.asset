@@ -47,6 +47,8 @@ MonoBehaviour:
   - Revivre
   - mortMonstre
   - AppliquerDegatsBalleTarrev
+  - JoueSonPassif
+  - changerMesh
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

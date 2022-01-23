@@ -79,15 +79,25 @@ public class comportementMonstre : MonoBehaviourPunCallbacks
             chercherProchaineCible();
         }
 
+        
+    }
+
+    public void OnTriggerExit(Collider collision)
+    {
         //Si je suis touché par une balle de
         //***************ATTAQUE DE BASE - TARREV ********************
-        if (infoCol.gameObject.tag == "BalleTarrev" && delaiHit == false)
+        if (collision.gameObject.tag == "BalleTarrev" && delaiHit == false)
         {
             //Indiquer au délai qu'il a été hit
             delaiHit = true;
 
-            //Dire aux autres joueurs que le joueur a été touché par une balle
-            photonView.RPC("AppliquerDegatsBalleTarrev", RpcTarget.AllBuffered, deplacementAbiletesTarrev.degatAttaqueTarrev);
+            print("TOUCHÉÉÉÉÉ NOOOOOO");
+
+            if (PhotonNetwork.IsMasterClient)
+            {
+                //Dire aux autres joueurs que le joueur a été touché par une balle
+                photonView.RPC("AppliquerDegatsBalleTarrev", RpcTarget.AllBuffered, deplacementAbiletesTarrev.degatAttaqueTarrev);
+            }
         }
     }
 
@@ -96,6 +106,7 @@ public class comportementMonstre : MonoBehaviourPunCallbacks
     [PunRPC]
     IEnumerator AppliquerDegatsBalleTarrev(float degats)
     {
+        print("degats apliques");
         //Baisser la vie et rafraîchir le slider
         vieMonstre -= degats;
         sliderMonstre.value = vieMonstre;

@@ -13,7 +13,7 @@ public class SpawnProjectile : MonoBehaviourPunCallbacks
     public AudioClip gunshot; //Son du tir
     public float cooldownTire; //Cooldown du tir
 
-    void Update()
+    void FixedUpdate()
     {
         //Lorsque le joueur appuie sur clique gauche et qu'il peut tirer
         if(Input.GetKey(KeyCode.Mouse0) && peutTirer && photonView.IsMine && viePersonnage.mort == false){
@@ -47,6 +47,7 @@ public class SpawnProjectile : MonoBehaviourPunCallbacks
     [PunRPC]
     void JoueSonTir()
     {
+        print("PEW");
         GetComponent<AudioSource>().PlayOneShot(gunshot);
     }
 }
