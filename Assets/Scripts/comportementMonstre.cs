@@ -53,7 +53,7 @@ public class comportementMonstre : MonoBehaviourPunCallbacks
     public void chercherProchaineCible()
     {
         //Piger un nombre aléatoire dans les destinations
-        int destinationAleatoire = Random.Range(0, destinations.Length);
+        int destinationAleatoire = Random.Range(0, destinations.Length - 1);
 
         //Changer la destination du monstre
         navAgent.SetDestination(destinations[destinationAleatoire].transform.position);
@@ -77,9 +77,7 @@ public class comportementMonstre : MonoBehaviourPunCallbacks
 
             //Appeler la fonction pour changer de cible
             chercherProchaineCible();
-        }
-
-        
+        }  
     }
 
     public void OnTriggerExit(Collider collision)
@@ -90,8 +88,6 @@ public class comportementMonstre : MonoBehaviourPunCallbacks
         {
             //Indiquer au délai qu'il a été hit
             delaiHit = true;
-
-            print("TOUCHÉÉÉÉÉ NOOOOOO");
 
             if (PhotonNetwork.IsMasterClient)
             {
@@ -106,7 +102,6 @@ public class comportementMonstre : MonoBehaviourPunCallbacks
     [PunRPC]
     IEnumerator AppliquerDegatsBalleTarrev(float degats)
     {
-        print("degats apliques");
         //Baisser la vie et rafraîchir le slider
         vieMonstre -= degats;
         sliderMonstre.value = vieMonstre;

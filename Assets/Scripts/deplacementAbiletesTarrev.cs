@@ -15,6 +15,12 @@ public class deplacementAbiletesTarrev : MonoBehaviourPunCallbacks
     public float gravite; //Gravit�
     private CharacterController controleur; //R�f�rence au character controler
     private float velocitePersoY; //V�locit�
+
+    public bool isGrounded;
+    public Transform groundCheck;
+    public float groundDistance = 0.4f;
+    public LayerMask groundMask;
+
     //ATTAQUES
     public static float degatAttaqueTarrev; //D�g�ts de l'attaque de base de Tarrev
     public float rayon; //Rayon maximum � l'entour de Tarrev
@@ -24,17 +30,15 @@ public class deplacementAbiletesTarrev : MonoBehaviourPunCallbacks
     public float distancePlusProche; //Distance la plus proche lorsque le passif change
     public int indexPlusProche; //Index de l'objet le plus proche lorsque le passif change
     public float valeurPassifAConvertir; //Distance de la cible
-    public float cooldownPassif = 20f; //Cooldown du passif
+    public float cooldownPassif; //Cooldown du passif
     public bool verifierCible = true; //Permet de v�rifier si on a changer de cible
     public GameObject ciblePassif; //Cible du passif
     public LineRenderer LineRenderer; //Ligne séparant Tarrev de sa marque
     public AudioClip sonPassif; //Son du passif à Tarrev
     public GameObject conteneurParticulePassif; //Permet de storer la particule du passif
-    public bool test;
 
     void Start()
     {
-        Invoke("teste", 2f);
         //Trouver la ligne dans la scène
         LineRenderer = GameObject.FindGameObjectWithTag("ligne").GetComponent<LineRenderer>();
 
@@ -47,26 +51,19 @@ public class deplacementAbiletesTarrev : MonoBehaviourPunCallbacks
             cameraJoueur.gameObject.SetActive(true);
         }
 
-        //� chaque 20 secondes, Tarrev marque l�ennemi le plus proche.
+        //� chaque x secondes, Tarrev marque l�ennemi le plus proche.
         InvokeRepeating("marquePassif", 0f, cooldownPassif);
-
-        //Associer son joueur à un layer pour pas que je collide avec le projectile
-        if (photonView.IsMine)
-        {
-            gameObject.layer = 8;
-        }
     }
 
-    /*
-     *   À chaque 30 secondes, Tarrev marque l�ennemi le plus proche. 
-     *   Tarrev gagne plus d�hauteur de saut et de plus en plus de damage d�pendamment de la distance s�parant sa marque de lui.
-     * 
-    */
-
-    void FixedUpdate()
+    
+    //DÉPLACEMENT
+    void Update()
     {
         if (photonView.IsMine && viePersonnage.mort == false)
         {
+            //Vérifier si je suis au sol
+            isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+
             //G�re la rotation du joueur
             float tourne = Input.GetAxis("Mouse X") * vitesseTourne * Time.deltaTime;
             transform.Rotate(0f, tourne, 0f);
@@ -80,16 +77,25 @@ public class deplacementAbiletesTarrev : MonoBehaviourPunCallbacks
             Vector3 deplacement = transform.TransformDirection(valeursInputs * vitesse);
 
             //Si le joueur est au sol et ne bouge pas, r�gler la v�locit� � 0
-            if (controleur.isGrounded && velocitePersoY < 0)
+            if (isGrounded && velocitePersoY < 0)
             {
                 velocitePersoY = 0f;
             }
 
             //Si on a appuyer sur la barre d'espace et qu'on est au sol, sauter
-            if (Input.GetKeyDown(KeyCode.Space) && controleur.isGrounded)
+            if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
             {   
                 velocitePersoY = forceDuSaut;
             }
+
+            //On prend la velocite Y auquuel on ajoute la gravit�
+            velocitePersoY += gravite * Time.deltaTime;
+            deplacement.y = velocitePersoY;
+
+            //On deplace notre character controller
+            controleur.Move(deplacement * Time.deltaTime);
+
+            //deplacement.y = 0f;
 
             //Vitesse de sprint
             if (Input.GetKey(KeyCode.LeftShift))
@@ -102,15 +108,6 @@ public class deplacementAbiletesTarrev : MonoBehaviourPunCallbacks
             {
                 vitesse = 10f;
             }
-
-            //On prend la velocite Y auquuel on ajoute la gravit�
-            velocitePersoY += gravite * Time.deltaTime;
-            deplacement.y = velocitePersoY;
-
-            //On deplace notre character controller
-            controleur.Move(deplacement * Time.deltaTime);
-
-            deplacement.y = 0f;
         }
 
         //VALEURS POUR LES ABILITIES/SAUT
@@ -140,8 +137,8 @@ public class deplacementAbiletesTarrev : MonoBehaviourPunCallbacks
                 LineRenderer.endColor = Color.black;
 
                 // set width of the renderer
-                LineRenderer.startWidth = 0.1f;
-                LineRenderer.endWidth = 0.1f;
+                LineRenderer.startWidth = 0.2f;
+                LineRenderer.endWidth = 0.2f;
 
                 // set the position
                 LineRenderer.SetPosition(0, gameObject.transform.position);
@@ -150,24 +147,27 @@ public class deplacementAbiletesTarrev : MonoBehaviourPunCallbacks
         }
 
         //SI LA CIBLE A �T� TU�E, CHANGER DE CIBLE
-        if (ciblePassif.gameObject == null && verifierCible == false && test == true)
+        if (ennemisProches.Count >= 1 && ennemisProches[indexPlusProche].gameObject == null && verifierCible == false)
         {
-            /*LineRenderer.gameObject.SetActive(false);
+            LineRenderer.gameObject.SetActive(false);
             conteneurParticulePassif.SetActive(false);
             verifierCible = true;
-            marquePassif();*/
+            marquePassif();
         }
     }
 
+    /*
+     *   À chaque 30 secondes, Tarrev marque l�ennemi le plus proche. 
+     *   Tarrev gagne plus d�hauteur de saut et de plus en plus de damage d�pendamment de la distance s�parant sa marque de lui.
+    */
     public void marquePassif()
     {
-        
-        //Aller chercher tous les colliders proche
-        Collider[] colliders = Physics.OverlapSphere(transform.position, rayon);
-
         //Vider la liste
         distances.Clear();
         ennemisProches.Clear();
+
+        //Aller chercher tous les colliders proche
+        Collider[] colliders = Physics.OverlapSphere(transform.position, rayon);
 
         //Pour chaque collider trouv�
         foreach (Collider objetProche in colliders)
@@ -175,7 +175,6 @@ public class deplacementAbiletesTarrev : MonoBehaviourPunCallbacks
             //Si il a un rigidbody
             if ((colliders.LongLength > 0) && (objetProche.gameObject.tag == "Player" || objetProche.gameObject.tag == "Ennemi") && (objetProche.gameObject.GetComponent<PhotonView>().ViewID != gameObject.GetComponent<PhotonView>().ViewID))
             {
-                print("marque");
                 //Remplir une liste avec toutes les distances entre l'objet et Tarrev
                 float distance = Vector3.Distance(gameObject.transform.position, objetProche.gameObject.transform.position);
 
@@ -242,11 +241,6 @@ public class deplacementAbiletesTarrev : MonoBehaviourPunCallbacks
     void JoueSonPassif()
     {
         GetComponent<AudioSource>().PlayOneShot(sonPassif);
-    }
-
-    public void teste()
-    {
-        test = true;
     }
 }
 

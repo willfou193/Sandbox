@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class MouseLook : MonoBehaviour
 {
-    public float mouseSensitivity = 175f; //Sensitivité de la souris
+    public float mouseSensitivity = 500f; //Sensitivité de la souris
     float xRotation = 0f; //Rotation 
 
     void Start()
     {
        //Lock la souris
-       //Cursor.lockState = CursorLockMode.Locked;
+       Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()

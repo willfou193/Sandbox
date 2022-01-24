@@ -47,7 +47,6 @@ public class SpawnProjectile : MonoBehaviourPunCallbacks
     [PunRPC]
     void JoueSonTir()
     {
-        print("PEW");
         GetComponent<AudioSource>().PlayOneShot(gunshot);
     }
 }

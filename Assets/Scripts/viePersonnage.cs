@@ -14,15 +14,15 @@ public class viePersonnage : MonoBehaviourPunCallbacks
     public static bool mort; //Booléenne détectant la mort du joueur
     public AudioClip sonMort; //Son de mort du joueur
     public GameObject ecranMort; //Référence à l'écran de mort
-    public float currentTime = 0f; //Temps courant du death timer
-    public float startingTime = 5f; //Temps courant du death timer
-    public TextMeshProUGUI deathTimer; //Référence au deathtimer
+    public float currentTime; //Temps courant du death timer
+    public float deathTimer; //Temps courant du death timer
+    public TextMeshProUGUI deathTimerText; //Référence au deathtimer
     public GameObject[] positionsSpawn; //Référence au spawner de joueur
     public bool delaiHit; //Délai pour par qu'il se fasse hit à multiple reprises
 
     void Start()
     {
-        currentTime = startingTime;
+        currentTime = deathTimer;
 
         positionsSpawn = GameObject.FindGameObjectsWithTag("positions");
     }
@@ -59,14 +59,14 @@ public class viePersonnage : MonoBehaviourPunCallbacks
             ecranMort.SetActive(true);
 
             //Désactiver le mesh renderer
-            photonView.RPC("changerMesh", RpcTarget.OthersBuffered, gameObject.name, false);
+            photonView.RPC("changerMesh", RpcTarget.OthersBuffered, gameObject.GetComponent<PhotonView>().ViewID, false);
         }
 
         //COUNTDOWN TIMER
         if (mort == true && photonView.IsMine)
         {
             currentTime -= 1 * Time.deltaTime;
-            deathTimer.text = currentTime.ToString("0");
+            deathTimerText.text = currentTime.ToString("0");
 
             if (currentTime <= 0)
             {
@@ -74,7 +74,7 @@ public class viePersonnage : MonoBehaviourPunCallbacks
                 ecranMort.SetActive(false);
 
                 //Activer le mesh renderer
-                photonView.RPC("changerMesh", RpcTarget.OthersBuffered, gameObject.name, true);
+                photonView.RPC("changerMesh", RpcTarget.OthersBuffered, gameObject.GetComponent<PhotonView>().ViewID, true);
 
                 //Ajuster la valeur du UI local
                 sliderJoueurUI.value = (vieJoueur + 1f);
@@ -86,7 +86,7 @@ public class viePersonnage : MonoBehaviourPunCallbacks
                 mort = false;
 
                 //Remettre le timer à sa valeur max
-                currentTime = startingTime;
+                currentTime = deathTimer;
 
                 //Téléporter le joueur à un endroit random
                 int nombreRandom = Random.Range(0, positionsSpawn.Length);
@@ -106,11 +106,8 @@ public class viePersonnage : MonoBehaviourPunCallbacks
             //Changer la valeur du slider local
             sliderJoueurUI.value = (vieJoueur - deplacementAbiletesTarrev.degatAttaqueTarrev);
 
-            if (PhotonNetwork.IsMasterClient)
-            {
-                //Dire aux autres joueurs que le joueur a été touché par une balle
-                photonView.RPC("AppliquerDegats", RpcTarget.AllBuffered, deplacementAbiletesTarrev.degatAttaqueTarrev);
-            }
+            //Dire aux autres joueurs que le joueur a été touché par une balle
+            photonView.RPC("AppliquerDegats", RpcTarget.AllBuffered, deplacementAbiletesTarrev.degatAttaqueTarrev);
         }
     }
 
@@ -123,6 +120,7 @@ public class viePersonnage : MonoBehaviourPunCallbacks
         sliderJoueur.value = vieJoueur;
         sliderJoueurUI.value = vieJoueur;
 
+        //Petit délai
         yield return new WaitForSeconds(0.5f);
 
         //Indiquer qu'il peut maitenant être hit un autre fois
@@ -148,8 +146,8 @@ public class viePersonnage : MonoBehaviourPunCallbacks
 
     //Disable le Mesh Renderer en RPC si je suis mort
     [PunRPC]
-    public void changerMesh(string nomObjet, bool changer)
+    public void changerMesh(int pvID, bool changer)
     {
-        GameObject.Find(nomObjet).GetComponent<MeshRenderer>().enabled = changer;
+        PhotonView.Find(pvID).gameObject.GetComponent<MeshRenderer>().enabled = changer;
     }
 }

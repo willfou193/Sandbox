@@ -2420,7 +2420,7 @@ GameObject:
   - component: {fileID: 893558144}
   - component: {fileID: 893558143}
   - component: {fileID: 893558142}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4012,7 +4012,7 @@ MonoBehaviour:
   - {fileID: 3395816247889797596, guid: cb9fc82c658844d498a35b26de51526b, type: 3}
   - {fileID: 6721580895843567779, guid: 514c5be584cb58a44b7fa489e8ca2d40, type: 3}
   - {fileID: 6265642697304811936, guid: 1a0cac148ee3c714cae7a8912687fdcd, type: 3}
-  cooldownMonstres: 15
+  cooldownMonstres: 5
 --- !u!4 &1291490604
 Transform:
   m_ObjectHideFlags: 0
