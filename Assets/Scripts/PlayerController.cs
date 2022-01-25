@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
     private bool isCrouch = false; //Bool pour savoir si le joueur est crouched
     public bool levierActiver = false; //Bool pour savoir si le levier est activé
     public string sortEnQuestion; //Sort choisi
-    public GameObject shortcut; //Raccourci pour la caisse
+    GameObject shortcut; //Raccourci pour la caisse
     bool caissePrise; //Bool pour savoir quelle caisse est prise
 
     void Start()
