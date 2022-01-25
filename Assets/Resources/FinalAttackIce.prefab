@@ -4857,7 +4857,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -14530,7 +14530,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -19394,7 +19394,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -24218,6 +24218,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8381695753065027659}
     m_Modifications:
+    - target: {fileID: 2086080562192710573, guid: 73a874084180ac1499346d09810d78ce,
+        type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2086080562355009343, guid: 73a874084180ac1499346d09810d78ce,
+        type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2086080563019005723, guid: 73a874084180ac1499346d09810d78ce,
+        type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2086080563114316787, guid: 73a874084180ac1499346d09810d78ce,
+        type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2086080563114316787, guid: 73a874084180ac1499346d09810d78ce,
         type: 3}
       propertyPath: InitialModule.startSize.scalar
@@ -24308,6 +24328,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: PS_IceAttack
       objectReference: {fileID: 0}
+    - target: {fileID: 2086080563580463521, guid: 73a874084180ac1499346d09810d78ce,
+        type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2086080564047266209, guid: 73a874084180ac1499346d09810d78ce,
+        type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2086080564047266209, guid: 73a874084180ac1499346d09810d78ce,
         type: 3}
       propertyPath: InitialModule.startSize.scalar
@@ -24330,8 +24360,18 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2086080562192710573, guid: 73a874084180ac1499346d09810d78ce,
         type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2086080562192710573, guid: 73a874084180ac1499346d09810d78ce,
+        type: 3}
       propertyPath: startDelay.scalar
       value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2086080562355009343, guid: 73a874084180ac1499346d09810d78ce,
+        type: 3}
+      propertyPath: looping
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2086080562355009343, guid: 73a874084180ac1499346d09810d78ce,
         type: 3}
@@ -24340,8 +24380,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2086080563019005723, guid: 73a874084180ac1499346d09810d78ce,
         type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2086080563019005723, guid: 73a874084180ac1499346d09810d78ce,
+        type: 3}
       propertyPath: startDelay.scalar
       value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2086080563114316787, guid: 73a874084180ac1499346d09810d78ce,
+        type: 3}
+      propertyPath: looping
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2086080563114316787, guid: 73a874084180ac1499346d09810d78ce,
         type: 3}
@@ -24440,8 +24490,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2086080563580463521, guid: 73a874084180ac1499346d09810d78ce,
         type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2086080563580463521, guid: 73a874084180ac1499346d09810d78ce,
+        type: 3}
       propertyPath: startDelay.scalar
       value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2086080564047266209, guid: 73a874084180ac1499346d09810d78ce,
+        type: 3}
+      propertyPath: looping
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2086080564047266209, guid: 73a874084180ac1499346d09810d78ce,
         type: 3}
@@ -24475,8 +24535,18 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2086080562192710573, guid: 73a874084180ac1499346d09810d78ce,
         type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2086080562192710573, guid: 73a874084180ac1499346d09810d78ce,
+        type: 3}
       propertyPath: startDelay.scalar
       value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2086080562355009343, guid: 73a874084180ac1499346d09810d78ce,
+        type: 3}
+      propertyPath: looping
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2086080562355009343, guid: 73a874084180ac1499346d09810d78ce,
         type: 3}
@@ -24485,8 +24555,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2086080563019005723, guid: 73a874084180ac1499346d09810d78ce,
         type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2086080563019005723, guid: 73a874084180ac1499346d09810d78ce,
+        type: 3}
       propertyPath: startDelay.scalar
       value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2086080563114316787, guid: 73a874084180ac1499346d09810d78ce,
+        type: 3}
+      propertyPath: looping
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2086080563114316787, guid: 73a874084180ac1499346d09810d78ce,
         type: 3}
@@ -24590,8 +24670,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2086080563580463521, guid: 73a874084180ac1499346d09810d78ce,
         type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2086080563580463521, guid: 73a874084180ac1499346d09810d78ce,
+        type: 3}
       propertyPath: startDelay.scalar
       value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2086080564047266209, guid: 73a874084180ac1499346d09810d78ce,
+        type: 3}
+      propertyPath: looping
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2086080564047266209, guid: 73a874084180ac1499346d09810d78ce,
         type: 3}
