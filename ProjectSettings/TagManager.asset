@@ -16,6 +16,7 @@ TagManager:
   - arbre
   - Ennemi
   - ligne
+  - boite
   layers:
   - Default
   - TransparentFX
