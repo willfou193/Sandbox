@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 928bfeba4681a1946915240a5793e294, type: 3}
+  m_Name: Epee en pierre
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 8140138526506813368, guid: 673f779d83b28844986b0ae23772af62, type: 3}
+  type: 1
+  description: "vous fairez davantage de d\xE9gas"
+  attBonus: 5
+  armBonus: 0

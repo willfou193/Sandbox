@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56fa1ec8af7a57f4190ccea391339908, type: 3}
+  m_Name: Baie
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 166795520546660115, guid: 6d9a71ab4a520a244826a2c6aea8252f, type: 3}
+  type: 0
+  description: Des baies sauvages! Excellent pour faire des potions.
+  restoreHealthValue: 5

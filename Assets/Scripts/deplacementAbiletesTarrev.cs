@@ -8,6 +8,7 @@ using System.Linq;
 
 public class deplacementAbiletesTarrev : MonoBehaviourPunCallbacks
 {
+
     public Camera cameraJoueur; //Cam�ra du joueur
     public float vitesse = 7f; //Vitesse du personnage
     public float vitesseTourne; //Vitesse de rotation du personnage
