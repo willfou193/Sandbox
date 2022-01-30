@@ -1,11 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Realtime;
-using Photon.Pun;
 using UnityEngine.UI;
 
-public class PlayerController : MonoBehaviourPunCallbacks
+public class PlayerController : MonoBehaviour
 {
 
     public Camera cameraJoueur; //Caméra du joueur
@@ -34,16 +32,12 @@ public class PlayerController : MonoBehaviourPunCallbacks
         //Racourci pour la caisse choisie
         shortcut = GameObject.FindGameObjectWithTag("caisseChoisie");
 
-        //Activer la caméra pour le joueur local seulement
-        if (photonView.IsMine)
-        {
-            cameraJoueur.gameObject.SetActive(true);
-        }
+ 
     }
 
     void Update()
     {
-        if (photonView.IsMine && viePersonnage.mort == false)
+        if (viePersonnage.mort == false)
         {
             //Gère la rotation du joueur
             float tourne = Input.GetAxis("Mouse X") * vitesseTourne * Time.deltaTime;
@@ -174,7 +168,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
                 print("je prend le sort" + hit.collider.name);
                 sortEnQuestion = hit.collider.name;
                 //a la base, c'étais gameObject.AddComponent(sortEnQuestion);
-                //UnityEngineInternal.APIUpdaterRuntimeServices.AddComponent(gameObject, "Assets/Scrips/PlayerController.cs (172,17)", sortEnQuestion);
+                UnityEngineInternal.APIUpdaterRuntimeServices.AddComponent(gameObject, "Assets/Scrips/PlayerController.cs (172,17)", sortEnQuestion);
                 Destroy(hit.collider.gameObject);
             }
         }

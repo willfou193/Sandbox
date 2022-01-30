@@ -6,17 +6,17 @@ using Photon.Realtime;
 
 public class Projectile : MonoBehaviourPunCallbacks
 {
-    public GameObject hitPrefab; //Référence à la particule hit
+    public GameObject hitPrefab; //Rï¿½fï¿½rence ï¿½ la particule hit
     public AudioClip impact; //Son de l'impact
 
     void Start()
     {
-        //La détruire sur réseau après 3 secondes
+        //La dï¿½truire sur rï¿½seau aprï¿½s 3 secondes
         StartCoroutine(detruireObjet(gameObject, 5f));
 
         //Ignorer la collision avec les arbres, les buissons...
         Physics.IgnoreLayerCollision(10, 11);
-        //Ignorer la collision avec soi-même
+        //Ignorer la collision avec soi-mï¿½me
         //Physics.IgnoreLayerCollision(8, 11);
     }
 
@@ -24,7 +24,7 @@ public class Projectile : MonoBehaviourPunCallbacks
     void OnCollisionEnter(Collision collisionInfo) {
         if (photonView.IsMine)
         {
-            //Jouer le son d'impact sur réseau
+            //Jouer le son d'impact sur rï¿½seau
             photonView.RPC("JoueSonShoot", RpcTarget.All);
 
             //Trouver le point de contact
@@ -32,13 +32,13 @@ public class Projectile : MonoBehaviourPunCallbacks
             Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
             Vector3 pos = contact.point;
 
-            //Instancier la particule hit sur réseau
+            //Instancier la particule hit sur rï¿½seau
             if (hitPrefab != null)
             {
                 GameObject hitVFX = PhotonNetwork.Instantiate(hitPrefab.name, pos, rot);
                 hitVFX.SetActive(true);
 
-                //La détruire sur réseau après 0.5secondes
+                //La dï¿½truire sur rï¿½seau aprï¿½s 0.5secondes
                 StartCoroutine(detruireObjet(hitVFX.gameObject, 0.5f));
             }
 
@@ -46,7 +46,7 @@ public class Projectile : MonoBehaviourPunCallbacks
         }
     }
 
-    //Détruire l'objet
+    //Dï¿½truire l'objet
     public IEnumerator detruireObjet(GameObject objetADetruire, float delai)
     {
         if (photonView.IsMine)
