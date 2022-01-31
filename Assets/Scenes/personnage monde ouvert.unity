@@ -11615,11 +11615,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventaire: {fileID: 11400000, guid: 33ca2f7b326682048a19d6a505a5c760, type: 2}
-  X_START: 38
-  Y_START: -38
-  X_SPACE_BETWEEN_ITEM: 35
-  Y_SPACE_BETWEEN_ITEM: 15
-  NUMBER_OF_COLUMN: 2
+  X_START: -99
+  Y_START: 136
+  X_SPACE_BETWEEN_ITEM: 50
+  Y_SPACE_BETWEEN_ITEM: 50
+  NUMBER_OF_COLUMN: 5
 --- !u!1 &879728272
 GameObject:
   m_ObjectHideFlags: 0
