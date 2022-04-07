@@ -168,7 +168,7 @@ public class PlayerController : MonoBehaviour
                 print("je prend le sort" + hit.collider.name);
                 sortEnQuestion = hit.collider.name;
                 //a la base, c'étais gameObject.AddComponent(sortEnQuestion);
-                UnityEngineInternal.APIUpdaterRuntimeServices.AddComponent(gameObject, "Assets/Scrips/PlayerController.cs (172,17)", sortEnQuestion);
+                //UnityEngineInternal.APIUpdaterRuntimeServices.AddComponent(gameObject, "Assets/Scrips/PlayerController.cs (172,17)", sortEnQuestion);
                 Destroy(hit.collider.gameObject);
             }
         }
