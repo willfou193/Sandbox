@@ -5,7 +5,7 @@ using UnityEngine;
 public class MouseLook : MonoBehaviour
 {
     public float mouseSensitivity = 500f; //Sensitivité de la souris
-    float xRotation = 0f; //Rotation 
+    float xRotation = 0f; //Rotation verticale
 
     void Start()
     {

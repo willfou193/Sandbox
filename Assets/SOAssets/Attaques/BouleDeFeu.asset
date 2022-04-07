@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c613ca9ad9006f4488ef67ff7fa51762, type: 3}
+  m_Name: BouleDeFeu
+  m_EditorClassIdentifier: 
+  nom: Boule de feu
+  icone: {fileID: 21300000, guid: 09c463f2eb30a9e4e948d3aa5c150a8f, type: 3}
+  DegatsEnnemi: 10
+  DegatsJoueur: 5
+  particuleAttaque: {fileID: 2267432118085897252, guid: f499aec8c02489d4ba72a56ad51358e1,
+    type: 3}
